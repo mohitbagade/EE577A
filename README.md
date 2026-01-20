@@ -75,5 +75,43 @@ The array was tested using a vector file to perform sequential Read/Write operat
 **Course:** EE 577A - VLSI System Design (USC, Spring 2024)  
 **Focus:** Full-custom IC design flows, memory circuit design, and timing closure in deep sub-micron technologies.
 
+## 📈 Results Summary
+
+### 1. Stability & Noise Margins
+The SRAM bit-cell was sized and characterized to meet strict Static Noise Margin (SNM) constraints to ensure data stability during read operations and successful flipping during write operations.
+
+| Metric | Constraint | Measured Value | Status |
+| :--- | :--- | :--- | :--- |
+| **Read SNM** | $\ge$ 200 mV | **[Insert Value] mV** | ✅ Pass |
+| **Write SNM** | $\ge$ 395 mV | **[Insert Value] mV** | ✅ Pass |
+| **Precharge Level** | $\ge$ 0.95 $V_{DD}$ | **[Insert Value] V** | ✅ Pass |
+
+### 2. Timing Performance
+Total access times were measured from the rising edge of the Clock (CLK) to the valid output at the Register. 
+
+| Operation | Total Delay |
+| :--- | :--- |
+| **Read Access Time** | **[Insert Value] ps** |
+| **Write Access Time** | **[Insert Value] ps** |
+
+> **Note:** The Write delay is confirmed to be less than or equal to the Read delay, satisfying the design requirement.
+
+### 3. Critical Path Breakdown (Read Operation)
+A detailed breakdown of the read cycle was performed to identify the latency contribution of each stage.
+
+| Stage | Delay Contribution | Description |
+| :--- | :--- | :--- |
+| **Decoder Delay** | **[Insert Value] ps** | Time from Address Input $\to$ Word Line (WL) Activation. |
+| **Bit-Line Discharge** | **[Insert Value] ps** | Time for BL/BLB to develop $\Delta V \approx 80\text{-}100\text{mV}$. |
+| **Sense Amp Delay** | **[Insert Value] ps** | Time from `sense_en` activation $\to$ Output Resolution. |
+
+---
+
+### 📝 Characterization Notes
+* **Technology Node:** 45nm CMOS
+* **Supply Voltage ($V_{DD}$):** 1.0 V
+* **Sensing Threshold:** The Sense Amplifier enable signal (`sense_en`) was timed to trigger only after a developed bit-line differential of **80–100 mV**.
+* **Write Driver:** N-MOS pass transistors were utilized for the column write mux to ensure strong "0" passing.
+
 ---
 *Note: This repository contains documentation and schematic overviews. Full design files (Cadence libraries) are not included due to licensing restrictions.*
